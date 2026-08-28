@@ -1,0 +1,28 @@
+{
+  "sections": {
+    "header": {
+      "type": "header",
+      "settings": {
+        "menu": "main-menu"
+      }
+    },
+    "main": {
+      "type": "main-collection",
+      "settings": {
+        "products_per_row": "4"
+      }
+    },
+    "footer": {
+      "type": "footer",
+      "settings": {
+        "shop_menu": "footer",
+        "help_menu": "footer",
+        "newsletter_enable": true
+      }
+    },
+    "cart_drawer": {
+      "type": "cart-drawer"
+    }
+  },
+  "order": ["header", "main", "footer", "cart_drawer"]
+}

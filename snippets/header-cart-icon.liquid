@@ -1,0 +1,6 @@
+<button type="button" class="header__icon" data-cart-open aria-label="Open cart">
+  {% render 'icon', name: 'cart' %}
+  <span class="cart-count" data-cart-count style="display:none">
+    {{ cart.item_count }}
+  </span>
+</button>

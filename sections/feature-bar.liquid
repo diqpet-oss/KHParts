@@ -1,0 +1,98 @@
+{%- if section.blocks.size > 0 -%}
+  <div class="container section--tight" style="margin-top:-24px;position:relative;z-index:3;">
+    <div class="features">
+      {%- for block in section.blocks -%}
+        <div class="feature" {{ block.shopify_attributes }}>
+          <div class="feature__icon">
+            {% render 'icon', name: block.settings.icon %}
+          </div>
+          <div>
+            <div class="feature__title">{{ block.settings.title }}</div>
+            <div class="feature__text">{{ block.settings.text }}</div>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Feature bar",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            {"value": "shield", "label": "Shield"},
+            {"value": "truck", "label": "Truck"},
+            {"value": "gauge", "label": "Gauge"},
+            {"value": "tools", "label": "Tools"},
+            {"value": "car", "label": "Car"},
+            {"value": "check", "label": "Check"}
+          ],
+          "default": "shield"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Verified fitment"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Every part is checked against OEM part numbers."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Feature bar",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "shield",
+            "title": "Verified fitment",
+            "text": "Every part cross-checked against OEM part numbers."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "truck",
+            "title": "Fast US shipping",
+            "text": "Stock in our US warehouse, dispatched in 24h."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "gauge",
+            "title": "Tested on real cars",
+            "text": "Parts fitted and tested before they go on sale."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "tools",
+            "title": "Install guides",
+            "text": "Video walkthroughs included with every order."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

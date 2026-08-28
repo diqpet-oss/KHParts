@@ -1,0 +1,187 @@
+{%- liquid
+  assign product = product
+  assign selected_variant = product.selected_or_first_available_variant
+-%}
+<section class="container">
+  <div class="product">
+    <div class="product__gallery">
+      <div class="product__main-image">
+        {%- if product.featured_image -%}
+          <img
+            src="{{ product.featured_image | image_url: width: 1200 }}"
+            alt="{{ product.featured_image.alt | escape | default: product.title | escape }}"
+            data-main-image
+            width="1200"
+            height="1200">
+        {%- else -%}
+          <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:#9ca3af;font-size:4rem;">🔧</div>
+        {%- endif -%}
+      </div>
+      {%- if product.images.size > 1 -%}
+        <div class="product__thumbs">
+          {%- for image in product.images limit: 5 -%}
+            <button
+              type="button"
+              class="product__thumb{% if forloop.first %} is-active{% endif %}"
+              data-thumb="{{ image | image_url: width: 1200 }}"
+              aria-label="View image {{ forloop.index }}">
+              <img
+                src="{{ image | image_url: width: 200 }}"
+                alt="{{ image.alt | escape | default: product.title | escape }}"
+                loading="lazy"
+                width="200"
+                height="200">
+            </button>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="product__info">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'title' -%}
+            <h1 class="product__title">{{ product.title }}</h1>
+            <p class="product__sku">
+              SKU: {{ product.selected_or_first_available_variant.sku | default: product.id }}
+            </p>
+
+          {%- when 'price' -%}
+            <div class="product__price">
+              <span data-price>{{ selected_variant.price | money }}</span>
+              {%- if selected_variant.compare_at_price > selected_variant.price -%}
+                <s data-compare-price>{{ selected_variant.compare_at_price | money }}</s>
+              {%- else -%}
+                <s data-compare-price style="display:none;"></s>
+              {%- endif -%}
+            </div>
+
+          {%- when 'fitment_note' -%}
+            <div class="product__fit-banner">
+              {% render 'icon', name: 'check' %}
+              <div>
+                <strong>Fitment verified.</strong>
+                This part is checked against OEM part numbers. If it doesn't fit, we'll make it right — message us on WhatsApp before installing if you're unsure.
+              </div>
+            </div>
+
+          {%- when 'buy_buttons' -%}
+            {%- form 'product', product, data-product-form: '', data-variants: product.variants | json | escape -%}
+              {%- if product.variants.size > 1 -%}
+                <div class="product__options">
+                  {%- for option in product.options_with_values -%}
+                    <div class="option-row">
+                      <label for="option-{{ option.name | handle }}">{{ option.name }}</label>
+                      <select id="option-{{ option.name | handle }}" data-option="{{ option.name }}">
+                        {%- for value in option.values -%}
+                          <option value="{{ value | escape }}" {% if option.selected_value == value %}selected{% endif %}>
+                            {{ value }}
+                          </option>
+                        {%- endfor -%}
+                      </select>
+                    </div>
+                  {%- endfor -%}
+                </div>
+              {%- endif -%}
+
+              <select name="id" style="display:none;">
+                {%- for variant in product.variants -%}
+                  <option value="{{ variant.id }}" {% if variant == selected_variant %}selected{% endif %}>
+                    {{ variant.title }}
+                  </option>
+                {%- endfor -%}
+              </select>
+
+              <div class="product__qty">
+                <label for="quantity">Qty</label>
+                <input type="number" id="quantity" name="quantity" value="1" min="1" max="99">
+              </div>
+
+              <button type="submit" class="btn btn--accent btn--lg btn--full">
+                Add to cart
+              </button>
+            {%- endform -%}
+
+            {%- if settings.social_whatsapp != blank -%}
+              <a
+                href="{{ settings.social_whatsapp }}"
+                target="_blank"
+                rel="noopener"
+                class="btn btn--outline btn--full"
+                style="margin-top:10px;">
+                {% render 'icon', name: 'whatsapp' %}
+                Ask about fitment on WhatsApp
+              </a>
+            {%- endif -%}
+
+          {%- when 'meta' -%}
+            <div class="product__meta">
+              <div class="product__meta-item">
+                {% render 'icon', name: 'truck' %} Ships from US warehouse
+              </div>
+              <div class="product__meta-item">
+                {% render 'icon', name: 'shield' %} Fitment guaranteed
+              </div>
+              <div class="product__meta-item">
+                {% render 'icon', name: 'tools' %} Install guide included
+              </div>
+              <div class="product__meta-item">
+                {% render 'icon', name: 'check' %} OEM verified
+              </div>
+            </div>
+
+          {%- when 'description' -%}
+            {%- if product.description != blank -%}
+              <div class="product__description rte">
+                {{ product.description }}
+              </div>
+            {%- endif -%}
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "title",
+      "name": "Title",
+      "limit": 1
+    },
+    {
+      "type": "price",
+      "name": "Price",
+      "limit": 1
+    },
+    {
+      "type": "fitment_note",
+      "name": "Fitment note",
+      "limit": 1
+    },
+    {
+      "type": "buy_buttons",
+      "name": "Buy buttons",
+      "limit": 1
+    },
+    {
+      "type": "meta",
+      "name": "Meta icons",
+      "limit": 1
+    },
+    {
+      "type": "description",
+      "name": "Description",
+      "limit": 1
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product"
+    }
+  ]
+}
+{% endschema %}

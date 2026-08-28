@@ -1,0 +1,111 @@
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="social-strip">
+      <h2 class="social-strip__title">{{ section.settings.title }}</h2>
+      <p class="social-strip__text">{{ section.settings.text }}</p>
+      <div class="social-strip__links">
+        {%- for block in section.blocks -%}
+          {%- if block.settings.url != blank -%}
+            <a href="{{ block.settings.url }}" target="_blank" rel="noopener" class="social-btn" {{ block.shopify_attributes }}>
+              {% render 'icon', name: block.settings.icon %}
+              {{ block.settings.label }}
+            </a>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Social strip",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Join 120k+ Hyundai & Kia owners"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "Weekly install guides, common-fault fixes and member-only part drops."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "social",
+      "name": "Social link",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            {"value": "tiktok", "label": "TikTok"},
+            {"value": "youtube", "label": "YouTube"},
+            {"value": "instagram", "label": "Instagram"},
+            {"value": "facebook", "label": "Facebook"},
+            {"value": "telegram", "label": "Telegram"},
+            {"value": "whatsapp", "label": "WhatsApp"}
+          ],
+          "default": "youtube"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Button label",
+          "default": "YouTube"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "URL"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Social strip",
+      "blocks": [
+        {
+          "type": "social",
+          "settings": {
+            "icon": "youtube",
+            "label": "YouTube",
+            "url": "https://www.youtube.com/@khparts"
+          }
+        },
+        {
+          "type": "social",
+          "settings": {
+            "icon": "tiktok",
+            "label": "TikTok",
+            "url": "https://www.tiktok.com/@khparts"
+          }
+        },
+        {
+          "type": "social",
+          "settings": {
+            "icon": "instagram",
+            "label": "Instagram",
+            "url": "https://www.instagram.com/khparts"
+          }
+        },
+        {
+          "type": "social",
+          "settings": {
+            "icon": "whatsapp",
+            "label": "WhatsApp",
+            "url": "https://wa.me/10000000000"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

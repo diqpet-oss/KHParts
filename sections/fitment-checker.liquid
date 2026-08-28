@@ -1,0 +1,100 @@
+<section class="section" style="padding-top:20px;">
+  <div class="container">
+    <div class="fitment">
+      <div class="section__header" style="text-align:left;margin-bottom:24px;">
+        <h2 class="section__title">{{ section.settings.title }}</h2>
+        <p class="section__subtitle">{{ section.settings.subtitle }}</p>
+      </div>
+
+      <form data-fitment-form>
+        <div class="fitment__grid">
+          <div class="field">
+            <label for="fitment-year">Year</label>
+            <select name="year" id="fitment-year">
+              <option value="">Select year</option>
+              {%- assign current_year = 'now' | date: '%Y' | plus: 0 -%}
+              {%- for i in (2005..current_year) reversed -%}
+                <option value="{{ i }}">{{ i }}</option>
+              {%- endfor -%}
+            </select>
+          </div>
+          <div class="field">
+            <label for="fitment-make">Make</label>
+            <select name="make" id="fitment-make">
+              <option value="">Select make</option>
+              <option value="Hyundai">Hyundai</option>
+              <option value="Kia">Kia</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="fitment-model">Model</label>
+            <select name="model" id="fitment-model">
+              <option value="">Select model</option>
+              <optgroup label="Hyundai">
+                <option value="Tucson">Tucson</option>
+                <option value="Santa Fe">Santa Fe</option>
+                <option value="Elantra">Elantra</option>
+                <option value="Sonata">Sonata</option>
+                <option value="Accent">Accent</option>
+                <option value="Palisade">Palisade</option>
+              </optgroup>
+              <optgroup label="Kia">
+                <option value="Sportage">Sportage</option>
+                <option value="Sorento">Sorento</option>
+                <option value="Forte">Forte</option>
+                <option value="K5">K5</option>
+                <option value="Seltos">Seltos</option>
+                <option value="Telluride">Telluride</option>
+              </optgroup>
+            </select>
+          </div>
+          <button type="submit" class="btn btn--primary" style="align-self:flex-end;">
+            {{ section.settings.button_label }}
+          </button>
+        </div>
+        <p class="fitment__note">
+          {% render 'icon', name: 'info' %}
+          {{ section.settings.note }}
+        </p>
+        <div data-fitment-result style="margin-top:12px;"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Fitment checker",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Is this part right for your car?"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Select your vehicle — we'll confirm compatibility before you buy."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Check compatibility"
+    },
+    {
+      "type": "textarea",
+      "id": "note",
+      "label": "Helper note",
+      "default": "Fitment data is based on OEM part numbers. Always confirm against your vehicle VIN or production date."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Fitment checker"
+    }
+  ]
+}
+{% endschema %}

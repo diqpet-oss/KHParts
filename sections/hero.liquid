@@ -1,0 +1,124 @@
+{%- liquid
+  assign heading = section.settings.heading
+  assign text = section.settings.text
+  assign eyebrow = section.settings.eyebrow
+  assign btn_label = section.settings.button_label
+  assign btn_link = section.settings.button_link
+  assign btn2_label = section.settings.button_2_label
+  assign btn2_link = section.settings.button_2_link
+  assign image = section.settings.image
+  assign video = section.settings.video
+  assign show_badges = section.settings.show_badges
+-%}
+<section class="hero{% if video != blank %} hero--video{% endif %}" aria-labelledby="hero-title">
+  {%- if video != blank -%}
+    <div class="hero__media">
+      {{ video | video_tag: autoplay: true, loop: true, muted: true, controls: false }}
+    </div>
+  {%- elsif image -%}
+    <div class="hero__media">
+      <img
+        src="{{ image | image_url: width: 1920 }}"
+        alt="{{ image.alt | escape | default: heading | escape }}"
+        width="1920"
+        height="1080"
+        fetchpriority="high">
+    </div>
+  {%- endif -%}
+
+  <div class="container hero__inner">
+    {%- if eyebrow != blank -%}
+      <span class="hero__eyebrow">{{ eyebrow }}</span>
+    {%- endif -%}
+    {%- if heading != blank -%}
+      <h1 id="hero-title" class="hero__title">{{ heading }}</h1>
+    {%- endif -%}
+    {%- if text != blank -%}
+      <p class="hero__text">{{ text }}</p>
+    {%- endif -%}
+    <div class="hero__actions">
+      {%- if btn_label != blank and btn_link != blank -%}
+        <a href="{{ btn_link }}" class="btn btn--accent btn--lg">{{ btn_label }}</a>
+      {%- endif -%}
+      {%- if btn2_label != blank and btn2_link != blank -%}
+        <a href="{{ btn2_link }}" class="btn btn--ghost btn--lg">{{ btn2_label }}</a>
+      {%- endif -%}
+    </div>
+    {%- if show_badges -%}
+      <div class="hero__badges">
+        <span class="hero__badge">{% render 'icon', name: 'check' %} Verified fitment</span>
+        <span class="hero__badge">{% render 'icon', name: 'check' %} US warehouse stock</span>
+        <span class="hero__badge">{% render 'icon', name: 'check' %} Install guides included</span>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Hyundai & Kia specialists"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The parts you need. Fitted right, first time."
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "Verified replacement parts for Tucson, Sportage, Elantra, Forte and more — with fitment checks, install guides and real-world tests from our workshop."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background image"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Background video"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Primary button label",
+      "default": "Shop by vehicle"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Primary button link"
+    },
+    {
+      "type": "text",
+      "id": "button_2_label",
+      "label": "Secondary button label",
+      "default": "Watch the workshop"
+    },
+    {
+      "type": "url",
+      "id": "button_2_link",
+      "label": "Secondary button link"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_badges",
+      "label": "Show trust badges",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero"
+    }
+  ]
+}
+{% endschema %}

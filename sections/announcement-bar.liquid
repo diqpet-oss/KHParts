@@ -1,0 +1,24 @@
+{%- if section.settings.text != blank -%}
+  <div class="announcement" style="background:var(--color-accent);color:#fff;text-align:center;padding:10px 16px;font-size:.9rem;font-weight:600;">
+    <div class="container">{{ section.settings.text }}</div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Announcement bar",
+  "settings": [
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Announcement text",
+      "default": "Free US shipping on orders over $99 — fitment guaranteed"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Announcement bar"
+    }
+  ]
+}
+{% endschema %}

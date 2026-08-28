@@ -1,0 +1,79 @@
+{%- liquid
+  assign logo = settings.logo
+  assign brand_name = settings.brand_name | default: shop.name
+-%}
+<header class="header" data-header>
+  <div class="container header__inner">
+    <button type="button" class="header__burger" data-mobile-nav-open aria-label="Open menu">
+      {% render 'icon', name: 'menu' %}
+    </button>
+
+    <a href="{{ routes.root_url }}" class="header__logo" aria-label="{{ shop.name }} home">
+      {%- if logo -%}
+        <img
+          src="{{ logo | image_url: width: 320 }}"
+          alt="{{ shop.name | escape }}"
+          width="{{ settings.logo_width | replace: 'px', '' }}"
+          height="44"
+          style="width:{{ settings.logo_width }}">
+      {%- else -%}
+        {{ brand_name }}
+      {%- endif -%}
+    </a>
+
+    <nav class="header__nav" aria-label="Main navigation">
+      <ul>
+        {%- for link in section.settings.menu.links -%}
+          <li>
+            <a href="{{ link.url }}" {% if link.current %}aria-current="page"{% endif %}>{{ link.title }}</a>
+          </li>
+        {%- endfor -%}
+      </ul>
+    </nav>
+
+    <div class="header__actions">
+      <a href="{{ routes.search_url }}" class="header__icon" aria-label="Search">
+        {% render 'icon', name: 'search' %}
+      </a>
+      {%- if shop.customer_accounts_enabled -%}
+        <a href="{{ routes.account_url }}" class="header__icon" aria-label="Account">
+          {% render 'icon', name: 'user' %}
+        </a>
+      {%- endif -%}
+      {% render 'header-cart-icon' %}
+    </div>
+  </div>
+</header>
+
+<div class="mobile-nav" data-mobile-nav>
+  <div class="mobile-nav__head">
+    <span style="font-size:1.2rem;font-weight:800;">{{ brand_name }}</span>
+    <button type="button" class="header__burger" data-mobile-nav-close aria-label="Close menu">
+      {% render 'icon', name: 'close' %}
+    </button>
+  </div>
+  <ul>
+    {%- for link in section.settings.menu.links -%}
+      <li><a href="{{ link.url }}" {% if link.current %}aria-current="page"{% endif %}>{{ link.title }}</a></li>
+    {%- endfor -%}
+  </ul>
+</div>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Main menu",
+      "default": "main-menu"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Header"
+    }
+  ]
+}
+{% endschema %}

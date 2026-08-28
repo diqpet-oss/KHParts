@@ -1,0 +1,68 @@
+<div class="container">
+  <div class="collection-header">
+    <h1 class="collection-header__title">{{ collection.title }}</h1>
+    {%- if collection.description != blank -%}
+      <p style="color:var(--color-text-light);max-width:680px;">{{ collection.description }}</p>
+    {%- endif -%}
+  </div>
+
+  <div class="collection-toolbar">
+    <span class="collection-count">
+      {{ collection.products_count }} {% if collection.products_count == 1 %}product{% else %}products{% endif %}
+    </span>
+    {%- if collection.products_count > 1 -%}
+      <div class="collection-sort">
+        <form>
+          <select
+            name="sort_by"
+            aria-label="Sort products"
+            onchange="this.form.submit()">
+            {%- for option in collection.sort_options -%}
+              <option value="{{ option.value }}" {% if option.value == collection.sort_by %}selected{% endif %}>
+                {{ option.name }}
+              </option>
+            {%- endfor -%}
+          </select>
+        </form>
+      </div>
+    {%- endif -%}
+  </div>
+
+  {%- if collection.products.size > 0 -%}
+    <div class="product-grid" style="--products-per-row: {{ section.settings.products_per_row }};">
+      {%- for product in collection.products -%}
+        {% render 'product-card', product: product %}
+      {%- endfor -%}
+    </div>
+    {% render 'pagination', paginate: paginate %}
+  {%- else -%}
+    <div class="empty">
+      <p>No products in this collection yet.</p>
+      <a href="{{ routes.all_products_collection_url }}" class="btn btn--outline" style="margin-top:12px;">Shop all products</a>
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Collection",
+  "settings": [
+    {
+      "type": "select",
+      "id": "products_per_row",
+      "label": "Products per row",
+      "options": [
+        {"value": "2", "label": "2"},
+        {"value": "3", "label": "3"},
+        {"value": "4", "label": "4"}
+      ],
+      "default": "4"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection"
+    }
+  ]
+}
+{% endschema %}

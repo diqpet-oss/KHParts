@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="{{ settings.color_primary }}">
+    <meta name="description" content="{{ page_description | default: settings.brand_tagline | escape }}">
+    <title>
+      {{ page_title }}{% if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif %}{% if current_page != 1 %} &ndash; Page {{ current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}
+    </title>
+
+    {% if page_description %}
+      <meta name="description" content="{{ page_description | escape }}">
+    {% endif %}
+
+    {% if settings.social_tiktok %}
+      <link rel="preconnect" href="https://www.tiktok.com" crossorigin>
+    {% endif %}
+    {% if settings.social_youtube %}
+      <link rel="preconnect" href="https://www.youtube.com" crossorigin>
+    {% endif %}
+    <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+
+    {% render 'social-meta-tags' %}
+    {% render 'favicon' %}
+
+    {{ 'base.css' | asset_url | stylesheet_tag }}
+    <style>
+      :root {
+        --color-primary: {{ settings.color_primary | default: '#0b4a8b' }};
+        --color-accent: {{ settings.color_accent | default: '#f15a24' }};
+        --color-bg: {{ settings.color_bg | default: '#ffffff' }};
+        --color-text: {{ settings.color_text | default: '#111827' }};
+        --color-text-light: color-mix(in srgb, {{ settings.color_text | default: '#111827' }} 65%, transparent);
+        --color-border: color-mix(in srgb, {{ settings.color_text | default: '#111827' }} 12%, transparent);
+        --color-primary-soft: color-mix(in srgb, {{ settings.color_primary | default: '#0b4a8b' }} 8%, white);
+        --color-accent-soft: color-mix(in srgb, {{ settings.color_accent | default: '#f15a24' }} 10%, white);
+        --radius: 12px;
+        --radius-sm: 8px;
+        --shadow-sm: 0 1px 3px rgba(0,0,0,.08);
+        --shadow-md: 0 8px 24px rgba(0,0,0,.10);
+        --font-body: {{ settings.type_body_font.family | default: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif' }};
+        --font-heading: {{ settings.type_heading_font.family | default: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif' }};
+      }
+    </style>
+    {{ content_for_header }}
+  </head>
+
+  <body class="template-{{ request.page_type | handle }}">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <main id="main" role="main" tabindex="-1">
+      {{ content_for_layout }}
+    </main>
+
+    <div id="modal-root"></div>
+
+    {{ 'base.js' | asset_url | script_tag }}
+    <script>
+      window.KHP = window.KHP || {};
+      window.KHP.routes = {
+        root: {{ routes.root_url | json }},
+        cart: {{ routes.cart_url | json }},
+        cart_add: {{ routes.cart_add_url | json }}
+      };
+      window.KHP.shop = {
+        name: {{ shop.name | json }},
+        currency: {{ cart.currency.iso_code | json }}
+      };
+    </script>
+  </body>
+</html>

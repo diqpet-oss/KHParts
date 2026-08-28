@@ -1,0 +1,102 @@
+{%- for block in section.blocks -%}
+  <div class="section" style="padding-top:0;" {{ block.shopify_attributes }}>
+    <div class="container">
+      <div class="collection-banner">
+        <div class="collection-banner__bg">
+          {%- if block.settings.image -%}
+            <img
+              src="{{ block.settings.image | image_url: width: 1600 }}"
+              alt="{{ block.settings.title | escape }}"
+              loading="lazy"
+              width="1600"
+              height="640">
+          {%- endif -%}
+        </div>
+        <div class="collection-banner__content">
+          <h3 class="collection-banner__title">{{ block.settings.title }}</h3>
+          {%- if block.settings.text != blank -%}
+            <p class="collection-banner__desc">{{ block.settings.text }}</p>
+          {%- endif -%}
+          {%- if block.settings.link != blank -%}
+            <a href="{{ block.settings.link }}" class="btn btn--accent" style="margin-top:14px;">{{ block.settings.link_label | default: 'Shop now' }}</a>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+{%- endfor -%}
+
+{% schema %}
+{
+  "name": "Collection banners",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "banner",
+      "name": "Banner",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Background image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Tucson / Sportage"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Suspension, brakes and drivetrain parts for the NX4/TLE platform."
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "Button label",
+          "default": "Shop now"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 3,
+  "presets": [
+    {
+      "name": "Collection banners",
+      "blocks": [
+        {
+          "type": "banner",
+          "settings": {
+            "title": "Tucson / Sportage",
+            "text": "Suspension, brakes and drivetrain for the NX4/TLE platform.",
+            "link_label": "Shop Tucson & Sportage"
+          }
+        },
+        {
+          "type": "banner",
+          "settings": {
+            "title": "Elantra / Forte",
+            "text": "Brakes, sensors and common-fault parts for the CN7/BD platform.",
+            "link_label": "Shop Elantra & Forte"
+          }
+        },
+        {
+          "type": "banner",
+          "settings": {
+            "title": "Santa Fe / Sorento",
+            "text": "Shocks, control arms and cooling for the TM/MQ4 platform.",
+            "link_label": "Shop Santa Fe & Sorento"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

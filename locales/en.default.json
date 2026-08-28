@@ -1,0 +1,26 @@
+{
+  "general": {
+    "search": {
+      "placeholder": "Search products"
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Add to cart",
+      "sold_out": "Sold out",
+      "quantity": "Quantity",
+      "sku": "SKU"
+    }
+  },
+  "cart": {
+    "general": {
+      "title": "Cart",
+      "empty": "Your cart is empty"
+    }
+  },
+  "layout": {
+    "cart": {
+      "title": "Cart"
+    }
+  }
+}

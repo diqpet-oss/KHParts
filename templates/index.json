@@ -1,0 +1,226 @@
+{
+  "sections": {
+    "announcement": {
+      "type": "announcement-bar",
+      "settings": {
+        "text": "Free US shipping over $99 · Fitment guaranteed · Install guides with every order"
+      }
+    },
+    "header": {
+      "type": "header",
+      "settings": {
+        "menu": "main-menu"
+      }
+    },
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "eyebrow": "Hyundai & Kia specialists",
+        "heading": "The parts you need. Fitted right, first time.",
+        "text": "Verified replacement parts for Tucson, Sportage, Elantra, Forte and more — fitment-checked, workshop-tested and backed by real install videos.",
+        "button_label": "Shop by vehicle",
+        "button_link": "/collections/all",
+        "button_2_label": "Watch the workshop",
+        "button_2_link": "https://www.youtube.com/@khparts",
+        "show_badges": true
+      }
+    },
+    "features": {
+      "type": "feature-bar",
+      "blocks": {
+        "verified": {
+          "type": "feature",
+          "settings": {
+            "icon": "shield",
+            "title": "Verified fitment",
+            "text": "Every part cross-checked against OEM part numbers."
+          }
+        },
+        "shipping": {
+          "type": "feature",
+          "settings": {
+            "icon": "truck",
+            "title": "Fast US shipping",
+            "text": "Stock in our US warehouse, dispatched in 24h."
+          }
+        },
+        "tested": {
+          "type": "feature",
+          "settings": {
+            "icon": "gauge",
+            "title": "Tested on real cars",
+            "text": "Fitted and tested before they go on sale."
+          }
+        },
+        "guides": {
+          "type": "feature",
+          "settings": {
+            "icon": "tools",
+            "title": "Install guides",
+            "text": "Video walkthroughs included with every order."
+          }
+        }
+      },
+      "block_order": ["verified", "shipping", "tested", "guides"]
+    },
+    "fitment": {
+      "type": "fitment-checker",
+      "settings": {
+        "title": "Is this part right for your car?",
+        "subtitle": "Select your vehicle — we'll confirm compatibility before you buy.",
+        "button_label": "Check compatibility",
+        "note": "Fitment data is based on OEM part numbers. Always confirm against your vehicle VIN or production date."
+      }
+    },
+    "bestsellers": {
+      "type": "collection-tabs",
+      "settings": {
+        "title": "Bestsellers — verified by our workshop",
+        "subtitle": "The parts our customers buy and reorder most.",
+        "collection": "all",
+        "limit": 8,
+        "products_per_row": "4",
+        "button_label": "Shop all parts",
+        "button_link": "/collections/all"
+      }
+    },
+    "banners": {
+      "type": "collection-banner",
+      "blocks": {
+        "tucson": {
+          "type": "banner",
+          "settings": {
+            "title": "Tucson / Sportage",
+            "text": "Suspension, brakes and drivetrain for the NX4/TLE platform.",
+            "link_label": "Shop Tucson & Sportage"
+          }
+        },
+        "elantra": {
+          "type": "banner",
+          "settings": {
+            "title": "Elantra / Forte",
+            "text": "Brakes, sensors and common-fault parts for the CN7/BD platform.",
+            "link_label": "Shop Elantra & Forte"
+          }
+        },
+        "santafe": {
+          "type": "banner",
+          "settings": {
+            "title": "Santa Fe / Sorento",
+            "text": "Shocks, control arms and cooling for the TM/MQ4 platform.",
+            "link_label": "Shop Santa Fe & Sorento"
+          }
+        }
+      },
+      "block_order": ["tucson", "elantra", "santafe"]
+    },
+    "videos": {
+      "type": "video-gallery",
+      "settings": {
+        "title": "From our workshop",
+        "subtitle": "Real installs, real faults, real fixes. Watch before you buy.",
+        "button_label": "Watch more on YouTube",
+        "button_link": "https://www.youtube.com/@khparts"
+      },
+      "blocks": {
+        "v1": {
+          "type": "video",
+          "settings": {
+            "title": "Kia Sportage control arm replacement",
+            "meta": "14 min · Install guide"
+          }
+        },
+        "v2": {
+          "type": "video",
+          "settings": {
+            "title": "Hyundai Tucson — top 5 common faults",
+            "meta": "8 min · Diagnostics"
+          }
+        },
+        "v3": {
+          "type": "video",
+          "settings": {
+            "title": "Brake pads: OEM vs aftermarket test",
+            "meta": "11 min · Comparison"
+          }
+        }
+      },
+      "block_order": ["v1", "v2", "v3"]
+    },
+    "social": {
+      "type": "social-strip",
+      "settings": {
+        "title": "Join 120k+ Hyundai & Kia owners",
+        "text": "Weekly install guides, common-fault fixes and member-only part drops."
+      },
+      "blocks": {
+        "yt": {
+          "type": "social",
+          "settings": {
+            "icon": "youtube",
+            "label": "YouTube",
+            "url": "https://www.youtube.com/@khparts"
+          }
+        },
+        "tt": {
+          "type": "social",
+          "settings": {
+            "icon": "tiktok",
+            "label": "TikTok",
+            "url": "https://www.tiktok.com/@khparts"
+          }
+        },
+        "ig": {
+          "type": "social",
+          "settings": {
+            "icon": "instagram",
+            "label": "Instagram",
+            "url": "https://www.instagram.com/khparts"
+          }
+        },
+        "wa": {
+          "type": "social",
+          "settings": {
+            "icon": "whatsapp",
+            "label": "WhatsApp",
+            "url": "https://wa.me/10000000000"
+          }
+        }
+      },
+      "block_order": ["yt", "tt", "ig", "wa"]
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "title": "Get the weekly fault report",
+        "text": "One email a week: common Hyundai/Kia faults, fixes and member-only pricing.",
+        "button_label": "Subscribe"
+      }
+    },
+    "footer": {
+      "type": "footer",
+      "settings": {
+        "shop_menu": "footer",
+        "help_menu": "footer",
+        "newsletter_enable": true
+      }
+    },
+    "cart_drawer": {
+      "type": "cart-drawer"
+    }
+  },
+  "order": [
+    "announcement",
+    "header",
+    "hero",
+    "features",
+    "fitment",
+    "bestsellers",
+    "banners",
+    "videos",
+    "social",
+    "newsletter",
+    "footer",
+    "cart_drawer"
+  ]
+}

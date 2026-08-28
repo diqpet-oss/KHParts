@@ -1,0 +1,21 @@
+{
+  "current": {
+    "brand_name": "KHParts",
+    "brand_tagline": "Premium replacement parts for Hyundai & Kia",
+    "color_primary": "#0b4a8b",
+    "color_accent": "#f15a24",
+    "color_bg": "#ffffff",
+    "color_text": "#111827",
+    "logo_width": "120px",
+    "social_tiktok": "https://www.tiktok.com/@khparts",
+    "social_youtube": "https://www.youtube.com/@khparts",
+    "social_instagram": "https://www.instagram.com/khparts",
+    "social_facebook": "https://www.facebook.com/khparts",
+    "fitment_title": "Is this part right for your car?",
+    "fitment_subtitle": "Enter your vehicle details to check compatibility before you buy.",
+    "fitment_button_label": "Check compatibility",
+    "products_per_row": "4",
+    "product_card_badge": "Verified Fit",
+    "enable_checkout_branding": true
+  }
+}

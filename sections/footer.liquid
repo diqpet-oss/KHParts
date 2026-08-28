@@ -1,0 +1,117 @@
+{%- liquid
+  assign brand_name = settings.brand_name | default: shop.name
+-%}
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">{{ brand_name }}</div>
+        <p class="footer__desc">
+          {{ settings.brand_tagline | default: 'Premium replacement parts for Hyundai & Kia, verified fit and shipped worldwide.' }}
+        </p>
+        <div class="footer__social">
+          {%- if settings.social_tiktok != blank -%}
+            <a href="{{ settings.social_tiktok }}" target="_blank" rel="noopener" aria-label="TikTok">
+              {% render 'icon', name: 'tiktok' %}
+            </a>
+          {%- endif -%}
+          {%- if settings.social_youtube != blank -%}
+            <a href="{{ settings.social_youtube }}" target="_blank" rel="noopener" aria-label="YouTube">
+              {% render 'icon', name: 'youtube' %}
+            </a>
+          {%- endif -%}
+          {%- if settings.social_instagram != blank -%}
+            <a href="{{ settings.social_instagram }}" target="_blank" rel="noopener" aria-label="Instagram">
+              {% render 'icon', name: 'instagram' %}
+            </a>
+          {%- endif -%}
+          {%- if settings.social_facebook != blank -%}
+            <a href="{{ settings.social_facebook }}" target="_blank" rel="noopener" aria-label="Facebook">
+              {% render 'icon', name: 'facebook' %}
+            </a>
+          {%- endif -%}
+          {%- if settings.social_telegram != blank -%}
+            <a href="{{ settings.social_telegram }}" target="_blank" rel="noopener" aria-label="Telegram">
+              {% render 'icon', name: 'telegram' %}
+            </a>
+          {%- endif -%}
+        </div>
+      </div>
+
+      <div>
+        <h4>Shop by vehicle</h4>
+        <ul>
+          {%- for link in section.settings.shop_menu.links -%}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {%- endfor -%}
+        </ul>
+      </div>
+
+      <div>
+        <h4>Help</h4>
+        <ul>
+          {%- for link in section.settings.help_menu.links -%}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {%- endfor -%}
+        </ul>
+      </div>
+
+      <div>
+        <h4>Follow the builds</h4>
+        <p style="font-size:.92rem;opacity:.8;margin-bottom:14px;">
+          Install guides, common faults and shop tours — straight from the workshop.
+        </p>
+        {%- if section.settings.newsletter_enable -%}
+          {% form 'customer' %}
+            <div class="newsletter">
+              <input
+                type="email"
+                name="contact[email]"
+                placeholder="Email address"
+                aria-label="Email address"
+                required>
+              <button type="submit" class="btn btn--accent" style="padding:12px 18px;">Join</button>
+            </div>
+            <p class="form-status" data-newsletter-status style="display:none;"></p>
+          {% endform %}
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <span>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</span>
+      <span>Hyundai&reg; and Kia&reg; are trademarks of their respective owners. {{ brand_name }} is an independent parts supplier.</span>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "shop_menu",
+      "label": "Shop menu",
+      "default": "footer"
+    },
+    {
+      "type": "link_list",
+      "id": "help_menu",
+      "label": "Help menu",
+      "default": "footer"
+    },
+    {
+      "type": "checkbox",
+      "id": "newsletter_enable",
+      "label": "Show newsletter signup",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Footer"
+    }
+  ]
+}
+{% endschema %}

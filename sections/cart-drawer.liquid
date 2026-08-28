@@ -1,0 +1,25 @@
+{% render 'cart-drawer' %}
+
+<div class="video-modal" data-video-modal>
+  <div class="video-modal__inner">
+    <button type="button" class="video-modal__close" data-video-close aria-label="Close video">&#10005;</button>
+    <iframe
+      src=""
+      title="Video"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+      loading="lazy"></iframe>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Cart drawer",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Cart drawer"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,69 @@
+<div class="container">
+  <div class="contact-grid">
+    <div class="contact-info">
+      <h1>Contact us</h1>
+      <p>Questions about fitment, bulk orders or shipping? Message us and we'll get back within one business day.</p>
+      <div style="display:flex;flex-direction:column;gap:12px;margin-top:24px;">
+        {%- if settings.social_whatsapp != blank -%}
+          <a href="{{ settings.social_whatsapp }}" target="_blank" rel="noopener" class="btn btn--outline" style="justify-content:flex-start;">
+            {% render 'icon', name: 'whatsapp' %} WhatsApp — fastest reply
+          </a>
+        {%- endif -%}
+        {%- if settings.social_telegram != blank -%}
+          <a href="{{ settings.social_telegram }}" target="_blank" rel="noopener" class="btn btn--outline" style="justify-content:flex-start;">
+            {% render 'icon', name: 'telegram' %} Telegram
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div>
+      {%- form 'contact', id: 'contact_form', class: 'contact-form' -%}
+        {%- if form.posted_successfully? -%}
+          <div class="form-status form-status--success">
+            Thanks for your message — we'll reply within one business day.
+          </div>
+        {%- endif -%}
+        {%- if form.errors -%}
+          <div class="form-status form-status--error">{{ form.errors.translated }}</div>
+        {%- endif -%}
+
+        <div class="field">
+          <label for="contact-name">Name</label>
+          <input type="text" id="contact-name" name="contact[name]" value="{{ form.name }}" required>
+        </div>
+        <div class="field">
+          <label for="contact-email">Email</label>
+          <input type="email" id="contact-email" name="contact[email]" value="{{ form.email }}" required>
+        </div>
+        <div class="field">
+          <label for="contact-subject">Subject</label>
+          <select id="contact-subject" name="contact[subject]">
+            <option>Fitment question</option>
+            <option>Order support</option>
+            <option>Wholesale / bulk order</option>
+            <option>Return or exchange</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="contact-body">Message</label>
+          <textarea id="contact-body" name="contact[body]" required placeholder="Include your vehicle year, model and OEM part number if you have one."></textarea>
+        </div>
+        <button type="submit" class="btn btn--primary">Send message</button>
+      {%- endform -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Contact form",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Contact form"
+    }
+  ]
+}
+{% endschema %}
